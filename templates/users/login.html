@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<h1>Admin Login</h1>
+<form action="{{ url_for('users.login') }}" method="POST">
+    {% with messages = get_flashed_messages(True) %}
+        {% if messages %}
+        <div class="row">
+            
+            {% for message in messages %}
+            <div class="card {{message[0]}}">
+            <div class="section">
+            <p>{{ message[1] }}</p>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    {{ form.hidden_tag() }}
+    User name: {{ form.full_name }} <br/>
+    Email: {{ form.email }} <br/>
+    Password: {{ form.password }} <br/>
+    Confirm Password: {{ form.confirm_password }} <br/>
+
+    <input type="submit" value="Login">
+</form>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Users_list{% endblock %}
+
+{% block contect %}
+
+
+{% block page_content %}
+
+
+<table>
+    <caption>Users</caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full name</th>
+        <th>Email</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+      <tr>  
+        <td data-label="id">{{ user.id}}</td>
+        <td data-label="full_name">{{user.full_name or '-------'}}</td>
+        <td data-label="email">{{user.email}}</td>
+        <td data-label="role">{{ 'Admin' if user.role else 'User'}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  {% endblock %}
+  {% endblock %}

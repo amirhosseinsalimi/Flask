@@ -1,0 +1,55 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Users_list{% endblock %}
+
+{% block contect %}
+
+
+{% block page_content %}
+
+{% with messages = get_flashed_messages(True) %}
+    {% if messages %}
+    <div class="row">
+
+        {% for message in messages %}
+        <div class="card {{message[0]}}">
+            <div class="section">
+                <p>{{ message[1] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+
+<table>
+    <caption>Users</caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Summary</th>
+        <th>Content</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+      <tr>  
+        <td data-label="id">{{ post.id}}</td>
+        <td data-label="title"><a href="{{url_for('blog.single_post', slug=post.slug)}}">{{post.title}}</a></td>
+        <td data-label="summary">{{post.summary or '---------------------'}}</td>
+        <td data-label="contect">{{ post.content }}</td>
+        <td data-label="Action">
+            <a href="{{ url_for('admin.post_delete' , post_id = post.id )}}" , class="button">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  {% endblock %}
+  {% endblock %}
